@@ -1,0 +1,5 @@
+name: 'drupal-bootstrap-example'
+type: theme
+description: 'The theme default of Dasa Sites.'
+base theme: false
+

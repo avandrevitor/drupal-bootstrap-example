@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+#^syntax detection
+forge "https://forgeapi.puppetlabs.com"
+
+mod 'puppet-nodejs', '2.2.0'
+mod 'puppetlabs-apt', '2.3.0'
+mod 'puppetlabs-firewall', '1.8.1'
