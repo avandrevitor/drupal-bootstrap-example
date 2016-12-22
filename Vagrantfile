@@ -27,7 +27,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "static" do |static|
     static.vm.hostname = "static.server.local"
     static.vm.network "forwarded_port", guest: 80, host: 8080
-    static.vm.synced_folder "./", "/vagrant" #, owner: "root", group: "root"
+    #static.vm.synced_folder "./", "/vagrant" #, owner: "root", group: "root"
 
     static.vm.provider :virtualbox do |v|
       v.customize [
@@ -39,7 +39,7 @@ Vagrant.configure("2") do |config|
     end
 
     static.vm.provision "shell", inline: <<-SHELL
-      #sudo -i
+      sudo -i
       apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 7F438280EF8D349F
       apt-get update -y --fix-missing
     SHELL
