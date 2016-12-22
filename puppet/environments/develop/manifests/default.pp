@@ -29,65 +29,62 @@ node "static.server.local"{
   include accounts
 
   class { '::nodejs':
-    manage_package_repo       => true,
+    manage_package_repo       => false,
     nodejs_dev_package_ensure => 'present',
     npm_package_ensure        => 'present',
   }->
+   nodejs::npm { 'express install':
+      ensure  => '4.14.0',
+      package => 'express',
+      install_options => ['--save-dev', '--no-bin-links'],
+      target  => '/vagrant/node_modules',
+    }->
+    nodejs::npm { 'bower install':
+      ensure  => '^1.7.9',
+      package => 'bower',
+      install_options => ['--save-dev', '--no-bin-links'],
+      target  => '/vagrant/node_modules',
+    }->
+    nodejs::npm { 'gulp install':
+      ensure  => '^3.9.1',
+      package => 'gulp',
+      install_options => ['--save-dev', '--no-bin-links'],
+      target  => '/vagrant/node_modules',
+    }->
+    nodejs::npm { 'gulp-clean install':
+      ensure  => '^0.3.2',
+      package => 'gulp-clean',
+      install_options => ['--save-dev', '--no-bin-links'],
+      target  => '/vagrant/node_modules',
+    }->
+    nodejs::npm { 'gulp-concat install':
+      ensure  => '^2.6.0',
+      package => 'gulp-concat',
+      install_options => ['--save-dev', '--no-bin-links'],
+      target  => '/vagrant/node_modules',
+    }->
+    nodejs::npm { 'gulp-inject install':
+      ensure  => '^4.1.0',
+      package => 'gulp-inject',
+      install_options => ['--save-dev', '--no-bin-links'],
+      target  => '/vagrant/node_modules',
+    }->
+    nodejs::npm { 'gulp-sass install':
+      ensure  => '^2.3.2',
+      package => 'gulp-sass',
+      install_options => ['--save-dev', '--no-bin-links'],
+      target  => '/vagrant/node_modules',
+    }->
+    nodejs::npm { 'gulp-uglify install':
+      ensure  => '^2.0.0',
+      package => 'gulp-uglify',
+      install_options => ['--save-dev', '--no-bin-links'],
+      target  => '/vagrant/node_modules',
+    }->
     firewall { '100 allow http and https access':
       dport   => [80],
       proto   => tcp,
       action  => accept,
     }
-  /*
-    ->
-    nodejs::npm { 'express install':
-      ensure  => '4.14.0',
-      package => 'express',
-      target  => '/vagrant/node_modules',
-      user    => 'vagrant',
-    }->
-    nodejs::npm { 'bower install':
-      ensure  => '^1.7.9',
-      package => 'bower',
-      target  => '/vagrant/node_modules',
-      user    => 'vagrant',
-    }->
-    nodejs::npm { 'gulp install':
-      ensure  => '^3.9.1',
-      package => 'gulp',
-      target  => '/vagrant/node_modules',
-      user    => 'vagrant',
-    }->
-    nodejs::npm { 'gulp-clean install':
-      ensure  => '^0.3.2',
-      package => 'gulp-clean',
-      target  => '/vagrant/node_modules',
-      user    => 'vagrant',
-    }->
-    nodejs::npm { 'gulp-concat install':
-      ensure  => '^2.6.0',
-      package => 'gulp-concat',
-      target  => '/vagrant/node_modules',
-      user    => 'vagrant',
-    }->
-    nodejs::npm { 'gulp-inject install':
-      ensure  => '^4.1.0',
-      package => 'gulp-inject',
-      target  => '/vagrant/node_modules',
-      user    => 'vagrant',
-    }->
-    nodejs::npm { 'gulp-sass install':
-      ensure  => '^2.3.2',
-      package => 'gulp-sass',
-      target  => '/vagrant/node_modules',
-      user    => 'vagrant',
-    }->
-    nodejs::npm { 'gulp-uglify install':
-      ensure  => '^2.0.0',
-      package => 'gulp-uglify',
-      target  => '/vagrant/node_modules',
-      user    => 'vagrant',
-    }->
-  */
 
 }
