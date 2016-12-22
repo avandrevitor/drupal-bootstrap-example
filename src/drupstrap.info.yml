@@ -1,5 +1,23 @@
-name: 'drupal-bootstrap-example'
+#
+# @author André Vitor Miranda <andre.miranda@gft.com>
+# @package drupal-bootstrap-example
+# @version 1.0.0
+# @license MIT
+#
+name: drupstrap
+description: Theme Drupal with Bootstrap
+version: 1.0.1
 type: theme
-description: 'The theme default of Dasa Sites.'
+core: 8.x
 base theme: false
-
+libraries-override:
+  system/base: false
+libraries:
+  - drupstrap/global-css
+regions:
+  header: Header
+  content: Content
+  first_sidebar: First Sidebar
+  second_sidebar: Second Sidebar
+  third_sidebar: Third Sidebar
+  footer: Footer

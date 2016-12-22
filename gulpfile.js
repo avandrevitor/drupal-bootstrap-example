@@ -13,21 +13,25 @@ var
     inject  = require('gulp-inject');
 
 var
-    source = 'src/js/',
-    dest   = 'build/',
+    source = 'src/',
+    js     = source +'js/',
+    dest   = 'build/drupstrap/',
     bower  = 'bower_components/',
     bootstrap = {
         in: bower+'bootstrap-sass/'
     },
     fonts = {
-        in: ['src/fonts/**/*', bootstrap.in + 'assets/fonts/**/*'],
+        in: [source+'fonts/**/*', bootstrap.in + 'assets/fonts/**/*'],
         out: dest + 'fonts/'
     },
     images = {
-        in: ['src/images/**/*'],
+        in: [source+'images/**/*'],
         out: dest + 'images/'
     };
-    html = 'src/templates/';
+    templates = {
+        in: [source+'templates/**/*'],
+        out: dest + 'templates/'
+    };
 
 var scss = {
     in: 'src/sass/main.scss',
@@ -46,12 +50,7 @@ var scss = {
 gulp.task('default', ['build'], function (){});
 
 gulp.task('clean', function() {
-    return gulp.src([
-        dest+'css/*',
-        dest+'js/*',
-        dest+'fonts/*',
-        dest+'images/*'
-    ],{read: false})
+    return gulp.src([dest],{read: false})
      .pipe(clean());
 });
 
@@ -67,6 +66,21 @@ gulp.task('images', function () {
     .pipe(gulp.dest(images.out));
 });
 
+gulp.task('templates', function () {
+    return gulp
+    .src(templates.in)
+    .pipe(gulp.dest(templates.out));
+});
+
+gulp.task('theme',function(){
+    return gulp.src([
+        source+'*.yml',
+        source+'*.ico',
+        source+'*.png',
+        source+'*.theme'
+    ]).pipe(gulp.dest(dest));
+});
+
 gulp.task('sass', ['fonts','images'], function () {
     return gulp.src([
         scss.in
@@ -77,16 +91,16 @@ gulp.task('sass', ['fonts','images'], function () {
 
 gulp.task('js', function() {
     gulp.src([
-        source + '**/*.js'
+        js + '**/*.js'
     ])
     //.pipe(uglify())
     //.pipe(concat('main.js'))
     .pipe(gulp.dest(dest+'js/'));
 });
 
-gulp.task('build', ['sass','js'],function () {
-    gulp.src(html + 'index.html')
-        .pipe(inject(gulp.src(dest+'css/**/*.css', {read: false}), {relative: true}))
-        .pipe(inject(gulp.src(dest+'js/main.js', {read: false}), {relative: true}))
-        .pipe(gulp.dest(dest));
+gulp.task('build', ['sass','js','templates','theme'],function () {
+//    gulp.src(html + 'index.html')
+//        .pipe(inject(gulp.src(dest+'css/**/*.css', {read: false}), {relative: true}))
+//        .pipe(inject(gulp.src(dest+'js/main.js', {read: false}), {relative: true}))
+//        .pipe(gulp.dest(dest));
 });

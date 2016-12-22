@@ -1,0 +1,35 @@
+<div class="container">
+    <header id="header">
+        <div class="masthead">
+            {{ page.header }}
+        </div>
+    </header>
+    <content id="content">
+        <div class="jumbotron">
+            {{ page.content }}
+        </div>
+    </content>
+    <div class="row" >
+        <div class="col-lg-4" id="first_sidebar">
+            {% if page.first_sidebar %}
+                {{ page.first_sidebar }}
+            {% endif %}
+        </div>
+        <div class="col-lg-4" id="second_sidebar">
+            {% if page.second_sidebar %}
+                {{ page.second_sidebar }}
+            {% endif %}
+        </div>
+        <div class="col-lg-4" id="third_sidebar">
+            {% if page.third_sidebar %}
+                {{ page.third_sidebar }}
+            {% endif %}
+        </div>
+    </div>
+    <!-- Site footer -->
+    {% if page.footer %}
+    <footer class="footer" id="footer">
+        {{ page.footer }}
+    </footer>
+    {% endif %}
+</div> <!-- /container -->
