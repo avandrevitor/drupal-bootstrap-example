@@ -43,9 +43,7 @@ var scss = {
     }
 }
 
-gulp.task('default', ['build'], function () {
-
-});
+gulp.task('default', ['build'], function (){});
 
 gulp.task('clean', function() {
     return gulp.src([
@@ -59,8 +57,8 @@ gulp.task('clean', function() {
 
 gulp.task('fonts',['clean'], function () {
     return gulp
-        .src(fonts.in)
-        .pipe(gulp.dest(fonts.out));
+    .src(fonts.in)
+    .pipe(gulp.dest(fonts.out));
 });
 
 gulp.task('images', function () {
@@ -89,6 +87,6 @@ gulp.task('js', function() {
 gulp.task('build', ['sass','js'],function () {
     gulp.src(html + 'index.html')
         .pipe(inject(gulp.src(dest+'css/**/*.css', {read: false}), {relative: true}))
-        .pipe(inject(gulp.src(dest+'js/**/*.js', {read: false}), {relative: true}))
+        .pipe(inject(gulp.src(dest+'js/main.js', {read: false}), {relative: true}))
         .pipe(gulp.dest(dest));
 });

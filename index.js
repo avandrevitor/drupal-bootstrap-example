@@ -7,10 +7,9 @@
 var express = require('express');
 var app = express();
 
-app.get('/', function (request, response) {
+app.use('/', express.static(__dirname + '/build'));
+app.use('/build', express.static(__dirname + '/build'));
 
-});
-
-app.listen(80, function () {
-    console.log('Example app listening on port 3000!');
+app.listen(8080, function () {
+    console.log('Server listening on port 8080!');
 });
